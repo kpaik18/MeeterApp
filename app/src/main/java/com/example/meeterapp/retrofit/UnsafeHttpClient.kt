@@ -1,4 +1,4 @@
-package com.example.meeterapp
+package com.example.meeterapp.retrofit
 
 import okhttp3.OkHttpClient
 import java.security.SecureRandom

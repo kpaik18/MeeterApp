@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="hour_view_left_color">#3D4145</color>
+    <color name="meeting_available_color">#8790C2</color>
 </resources>

@@ -12,19 +12,14 @@ import com.example.meeterapp.auth.AuthService
 import com.example.meeterapp.auth.`object`.AuthTokenResponse
 import com.example.meeterapp.auth.`object`.LoginRequest
 import com.example.meeterapp.meeting.MeetingActivity
+import com.example.meeterapp.retrofit.RetrofitFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : ComponentActivity() {
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://meeterbacktest.onrender.com/") // Your base URL goes here
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(UnsafeHttpClient.getUnsafeOkHttpClient()?.build())
-        .build()
+    val retrofit = RetrofitFactory.getRetrofitClient()
 
     val authService = retrofit.create(AuthService::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
