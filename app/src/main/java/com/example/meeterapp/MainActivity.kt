@@ -1,6 +1,7 @@
 package com.example.meeterapp
 
 import TokenManager
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
@@ -10,16 +11,19 @@ import androidx.activity.ComponentActivity
 import com.example.meeterapp.auth.AuthService
 import com.example.meeterapp.auth.`object`.AuthTokenResponse
 import com.example.meeterapp.auth.`object`.LoginRequest
+import com.example.meeterapp.meeting.MeetingActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class MainActivity : ComponentActivity() {
     val retrofit = Retrofit.Builder()
-        .baseUrl("http://10.0.2.2:8080/") // Your base URL goes here
+        .baseUrl("https://meeterbacktest.onrender.com/") // Your base URL goes here
         .addConverterFactory(GsonConverterFactory.create())
+        .client(UnsafeHttpClient.getUnsafeOkHttpClient()?.build())
         .build()
 
     val authService = retrofit.create(AuthService::class.java)
@@ -31,8 +35,6 @@ class MainActivity : ComponentActivity() {
         loginButton.setOnClickListener {
             login()
         }
-
-
     }
 
     private fun login() {
@@ -55,7 +57,8 @@ class MainActivity : ComponentActivity() {
                         authTokenResponse?.let {
                             TokenManager.accessToken = authTokenResponse!!.accessToken
                             TokenManager.refreshToken = authTokenResponse!!.refreshToken
-                            println("success login")
+                            val intent = Intent(this@MainActivity, MeetingActivity::class.java)
+                            startActivity(intent)
                         }
                     } else {
                         showToast("Invalid User Or Password")
@@ -127,5 +130,6 @@ class MainActivity : ComponentActivity() {
         }
 
     }
+
 }
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="squareView" type="id" />
+    <item name="rectangle1" type="id" />
+    <item name="rectangle2" type="id" />
+    <item name="hourTextView" type="id" />
+</resources>
