@@ -2,6 +2,7 @@ package com.example.meeterapp.meeting
 
 import MeetingDTO
 import TokenManager
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,7 @@ class MeetingActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     val retrofit = RetrofitFactory.getRetrofitClient()
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class MeetingActivity : ComponentActivity() {
             val hourTextView: TextView =
                 itemView.findViewById(com.example.meeterapp.R.id.hourTextView)
             hourTextView.text = String.format("%02d:00", i)
+            hourTextView.setTextColor(R.color.hour_view_time_color)
             containerLayout.addView(itemView)
         }
 
@@ -69,6 +72,7 @@ class MeetingActivity : ComponentActivity() {
 
         meetingService.getDayMeetings("Bearer " + TokenManager.accessToken!!, localDay)
             .enqueue(object : Callback<DayDTO> {
+                @SuppressLint("ResourceAsColor")
                 override fun onResponse(call: Call<DayDTO>, response: Response<DayDTO>) {
                     if (response.isSuccessful) {
                         day = response.body()
@@ -79,14 +83,18 @@ class MeetingActivity : ComponentActivity() {
                                 val containerLayout =
                                     findViewById<LinearLayout>(com.example.meeterapp.R.id.containerLayout)
                                 val hourChild = containerLayout.getChildAt(startHour)
-                                var meetingContainerView =
-                                    hourChild.findViewById<View>(R.id.meeting_container)
                                 var meetingTextView =
                                     hourChild.findViewById<TextView>(R.id.meeting_text)
+                                var color: Int = -1
+                                if (meeting.status.name.equals("OPEN")) {
+                                    color = R.color.meeting_not_reserved
+                                } else {
+                                    color = R.color.meeting_reserved
+                                }
                                 meetingTextView.setBackgroundColor(
                                     ContextCompat.getColor(
                                         this@MeetingActivity,
-                                        R.color.meeting_available_color
+                                        color
                                     )
                                 )
                                 meetingTextView.text = meeting.name
