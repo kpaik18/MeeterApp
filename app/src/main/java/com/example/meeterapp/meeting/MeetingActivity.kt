@@ -96,7 +96,8 @@ class MeetingActivity : ComponentActivity() {
                                     ContextCompat.getColor(
                                         this@MeetingActivity,
                                         color
-                                    ), 10.0f
+                                    ),
+                                    25.0f
                                 )
                                 meetingTextView.background = backgroundDrawable
                                 meetingTextView.text = meeting.name
@@ -115,6 +116,7 @@ class MeetingActivity : ComponentActivity() {
             })
 
     }
+
 
     fun createRoundBackgroundDrawable(backgroundColor: Int, cornerRadius: Float): GradientDrawable {
         val drawable = GradientDrawable()
