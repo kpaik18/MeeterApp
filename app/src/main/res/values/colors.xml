@@ -13,4 +13,6 @@
     <color name="meeting_not_reserved">#ECF1F9</color>
     <color name="meeting_reserved">#DAE2F3</color>
     <color name="hour_view_time_color">#AFB0BE</color>
+    <color name="meeting_title_color">#54555C</color>
+    <color name="meeting_details_color">#76777D</color>
 </resources>
