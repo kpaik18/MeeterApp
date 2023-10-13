@@ -3,6 +3,7 @@ package com.example.meeterapp.meeting
 import MeetingDTO
 import TokenManager
 import android.annotation.SuppressLint
+import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -91,12 +92,13 @@ class MeetingActivity : ComponentActivity() {
                                 } else {
                                     color = R.color.meeting_reserved
                                 }
-                                meetingTextView.setBackgroundColor(
+                                var backgroundDrawable = createRoundBackgroundDrawable(
                                     ContextCompat.getColor(
                                         this@MeetingActivity,
                                         color
-                                    )
+                                    ), 10.0f
                                 )
+                                meetingTextView.background = backgroundDrawable
                                 meetingTextView.text = meeting.name
                             }
                         }
@@ -112,6 +114,14 @@ class MeetingActivity : ComponentActivity() {
 
             })
 
+    }
+
+    fun createRoundBackgroundDrawable(backgroundColor: Int, cornerRadius: Float): GradientDrawable {
+        val drawable = GradientDrawable()
+        drawable.shape = GradientDrawable.RECTANGLE
+        drawable.cornerRadius = cornerRadius
+        drawable.setColor(backgroundColor)
+        return drawable
     }
 
 
