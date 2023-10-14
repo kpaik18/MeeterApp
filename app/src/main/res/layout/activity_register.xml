@@ -7,7 +7,7 @@
     tools:context=".register.RegisterActivity">
 
     <TextView
-        android:id="@+id/logoImageView"
+        android:id="@+id/registerLogoImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextFirstName"
+        android:id="@+id/registerEditTextFirstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logoImageView"
+        android:layout_below="@+id/registerLogoImageView"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -29,10 +29,10 @@
         android:hint="First Name" />
 
     <EditText
-        android:id="@+id/editTextLastName"
+        android:id="@+id/registerEditTextLastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextFirstName"
+        android:layout_below="@+id/registerEditTextFirstName"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -40,10 +40,10 @@
         android:hint="Last Name" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/registerEditTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextLastName"
+        android:layout_below="@+id/registerEditTextLastName"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -51,10 +51,10 @@
         android:hint="Email" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/registerEditTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextEmail"
+        android:layout_below="@+id/registerEditTextEmail"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -66,7 +66,7 @@
         android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextPassword"
+        android:layout_below="@+id/registerEditTextPassword"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
