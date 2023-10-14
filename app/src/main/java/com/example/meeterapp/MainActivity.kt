@@ -14,6 +14,7 @@ import com.example.meeterapp.auth.AuthService
 import com.example.meeterapp.auth.`object`.AuthTokenResponse
 import com.example.meeterapp.auth.`object`.LoginRequest
 import com.example.meeterapp.meeting.MeetingActivity
+import com.example.meeterapp.register.RegisterActivity
 import com.example.meeterapp.retrofit.RetrofitFactory
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,7 +24,6 @@ import retrofit2.Response
 @RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : ComponentActivity() {
     val retrofit = RetrofitFactory.getRetrofitClient()
-
     val authService = retrofit.create(AuthService::class.java)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +33,14 @@ class MainActivity : ComponentActivity() {
         loginButton.setOnClickListener {
             login()
         }
+        findViewById<Button>(R.id.mainRegisterButton).setOnClickListener {
+            openRegisterPage()
+        }
+    }
+
+    private fun openRegisterPage() {
+        val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+        startActivity(intent)
     }
 
     private fun login() {

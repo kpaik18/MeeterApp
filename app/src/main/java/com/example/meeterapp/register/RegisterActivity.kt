@@ -1,6 +1,7 @@
 package com.example.meeterapp.register
 
 import TokenManager
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
@@ -10,6 +11,7 @@ import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import com.example.meeterapp.R
 import com.example.meeterapp.auth.`object`.AuthTokenResponse
+import com.example.meeterapp.meeting.MeetingActivity
 import com.example.meeterapp.register.`object`.RegisterDTO
 import com.example.meeterapp.retrofit.RetrofitFactory
 import retrofit2.Call
@@ -18,18 +20,19 @@ import retrofit2.Response
 
 @RequiresApi(Build.VERSION_CODES.O)
 class RegisterActivity : ComponentActivity() {
-    val registerButton: Button = findViewById(R.id.buttonRegister)
-    val retrofit = RetrofitFactory.getRetrofitClient()
-    val registerService: RegisterService = retrofit.create(RegisterService::class.java)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        val registerButton: Button = findViewById(R.id.registerButton)
         registerButton.setOnClickListener {
             registerUser()
         }
     }
 
     private fun registerUser() {
+        val retrofit = RetrofitFactory.getRetrofitClient()
+        val registerService: RegisterService = retrofit.create(RegisterService::class.java)
         val firstName = findViewById<TextView>(R.id.registerEditTextFirstName).text.toString()
         val lastName = findViewById<TextView>(R.id.registerEditTextLastName).text.toString()
         val email = findViewById<TextView>(R.id.registerEditTextEmail).text.toString()
@@ -44,8 +47,9 @@ class RegisterActivity : ComponentActivity() {
                     if (response.isSuccessful) {
                         TokenManager.accessToken = response.body()!!.accessToken
                         TokenManager.refreshToken = response.body()!!.refreshToken
-                        showToast("success on registration")
-                    }else{
+                        val intent = Intent(this@RegisterActivity, MeetingActivity::class.java)
+                        startActivity(intent)
+                    } else {
                         showToast("response not succesfull")
                     }
                 }
@@ -56,6 +60,7 @@ class RegisterActivity : ComponentActivity() {
             }
             )
     }
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
