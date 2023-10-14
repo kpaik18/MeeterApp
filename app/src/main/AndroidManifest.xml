@@ -16,6 +16,9 @@
         android:theme="@style/Theme.MeeterApp"
         tools:targetApi="31">
         <activity
+            android:name=".register.RegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".meeting.MeetingActivity"
             android:exported="false" />
         <activity

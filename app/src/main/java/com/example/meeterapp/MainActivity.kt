@@ -2,12 +2,14 @@ package com.example.meeterapp
 
 import TokenManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import com.example.meeterapp.auth.AuthService
 import com.example.meeterapp.auth.`object`.AuthTokenResponse
 import com.example.meeterapp.auth.`object`.LoginRequest
@@ -18,6 +20,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 class MainActivity : ComponentActivity() {
     val retrofit = RetrofitFactory.getRetrofitClient()
 
