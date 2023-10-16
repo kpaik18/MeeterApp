@@ -37,28 +37,58 @@ class RegisterActivity : ComponentActivity() {
         val lastName = findViewById<TextView>(R.id.registerEditTextLastName).text.toString()
         val email = findViewById<TextView>(R.id.registerEditTextEmail).text.toString()
         val password = findViewById<TextView>(R.id.registerEditTextPassword).text.toString()
-        var registerDTO = RegisterDTO(firstName, lastName, email, password)
-        registerService.registerUser(registerDTO)
-            .enqueue(object : Callback<AuthTokenResponse> {
-                override fun onResponse(
-                    call: Call<AuthTokenResponse>,
-                    response: Response<AuthTokenResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        TokenManager.accessToken = response.body()!!.accessToken
-                        TokenManager.refreshToken = response.body()!!.refreshToken
-                        val intent = Intent(this@RegisterActivity, MeetingActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        showToast("response not succesfull")
+        if (checkValues(firstName, lastName, email, password)) {
+            var registerDTO = RegisterDTO(firstName, lastName, email, password)
+            registerService.registerUser(registerDTO)
+                .enqueue(object : Callback<AuthTokenResponse> {
+                    override fun onResponse(
+                        call: Call<AuthTokenResponse>,
+                        response: Response<AuthTokenResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            TokenManager.accessToken = response.body()!!.accessToken
+                            TokenManager.refreshToken = response.body()!!.refreshToken
+                            val intent = Intent(this@RegisterActivity, MeetingActivity::class.java)
+                            startActivity(intent)
+                        } else {
+                            showToast("Invalid Values")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<AuthTokenResponse>, t: Throwable) {
+                        showToast("you're such a failure")
                     }
                 }
+                )
+        }
+    }
 
-                override fun onFailure(call: Call<AuthTokenResponse>, t: Throwable) {
-                    showToast("you're such a failure")
-                }
-            }
+    private fun checkValues(
+        firstName: String,
+        lastName: String,
+        email: String,
+        password: String
+    ): Boolean {
+        if (firstName.length < 3) {
+            showToast("First name must have at least 3 characters")
+            return false
+        }
+        if (lastName.length < 3) {
+            showToast("Last name must have at least 3 characters")
+            return false
+        }
+        if (!Regex("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}\$").matches(
+                email
             )
+        ) {
+            showToast("Enter Valid Email Address")
+            return false
+        }
+        if (password.length < 3) {
+            showToast("Password must have at least 3 characters")
+            return false
+        }
+        return true
     }
 
     private fun showToast(message: String) {
