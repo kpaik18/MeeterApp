@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import com.example.meeterapp.auth.AuthService
 import com.example.meeterapp.auth.`object`.AuthTokenResponse
 import com.example.meeterapp.auth.`object`.LoginRequest

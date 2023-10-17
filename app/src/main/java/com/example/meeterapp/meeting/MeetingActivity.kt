@@ -12,10 +12,11 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import com.example.meeterapp.R
+import com.example.meeterapp.meeting.details.MeetingDetailsFragment
 import com.example.meeterapp.meeting.`object`.DayDTO
 import com.example.meeterapp.retrofit.RetrofitFactory
 import retrofit2.Call
@@ -26,7 +27,7 @@ import java.time.LocalDate
 import java.util.concurrent.CountDownLatch
 
 
-class MeetingActivity : ComponentActivity() {
+class MeetingActivity : FragmentActivity() {
     private lateinit var meetingService: MeetingService
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -86,21 +87,8 @@ class MeetingActivity : ComponentActivity() {
                                 val hourChild = containerLayout.getChildAt(startHour)
                                 var meetingTextView =
                                     hourChild.findViewById<TextView>(R.id.meeting_text)
-                                var color: Int = -1
-                                if (meeting.status.name.equals("OPEN")) {
-                                    color = R.color.meeting_not_reserved
-                                } else {
-                                    color = R.color.meeting_reserved
-                                }
-                                var backgroundDrawable = createRoundBackgroundDrawable(
-                                    ContextCompat.getColor(
-                                        this@MeetingActivity,
-                                        color
-                                    ),
-                                    25.0f
-                                )
-                                meetingTextView.background = backgroundDrawable
-                                meetingTextView.text = meeting.name
+                                setMeetingDetailsListener(meetingTextView)
+                                setMeetingData(meeting, meetingTextView)
                             }
                         }
                         println()
@@ -115,6 +103,40 @@ class MeetingActivity : ComponentActivity() {
 
             })
 
+    }
+
+    private fun setMeetingDetailsListener(meetingTextView: TextView?) {
+        meetingTextView!!.setOnClickListener {
+            val meetingDetailsFragment = MeetingDetailsFragment()
+
+            // Pass meeting details to the fragment using arguments
+            val args = Bundle()
+            args.putString("meetingTitle", "test")
+            args.putString("meetingDescription", "test")
+            meetingDetailsFragment.arguments = args
+
+            // Use this as the context to access the FragmentManager
+            meetingDetailsFragment.show(this.supportFragmentManager, meetingDetailsFragment.tag)
+
+        }
+    }
+
+    private fun setMeetingData(meeting: MeetingDTO, meetingTextView: TextView) {
+        var color: Int = -1
+        if (meeting.status.name.equals("OPEN")) {
+            color = R.color.meeting_not_reserved
+        } else {
+            color = R.color.meeting_reserved
+        }
+        var backgroundDrawable = createRoundBackgroundDrawable(
+            ContextCompat.getColor(
+                this@MeetingActivity,
+                color
+            ),
+            25.0f
+        )
+        meetingTextView.background = backgroundDrawable
+        meetingTextView.text = meeting.name
     }
 
 
