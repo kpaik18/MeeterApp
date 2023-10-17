@@ -5,4 +5,6 @@
     <item name="rectangle2" type="id" />
     <item name="hourTextView" type="id" />
     <item name="meeting_details_card_title" type="id" />
+    <item name="meeting_details_card_title_text" type="id" />
+    <item name="meeting_details_card_status_text" type="id" />
 </resources>
