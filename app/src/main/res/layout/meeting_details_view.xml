@@ -1,58 +1,44 @@
-<!-- meeting_details_card.xml -->
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_margin="16dp"
-    android:elevation="8dp"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/meeting_details_view_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="შეხვედრის სახელი"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@id/meeting_details_card_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:text="შეხვედრის სახელი"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/meeting_details_view_status"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="სტატუსი"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meeting_details_view_title" />
 
-        <TextView
-            android:id="@id/meeting_details_card_title_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:text="სახელი"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/meeting_details_card_title" />
+    <TextView
+        android:id="@+id/meeting_details_view_start_time"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="Start Date: January 1, 2023, 10:00 AM"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/meeting_details_view_status" />
 
-        <TextView
-            android:id="@+id/meeting_details_card_status"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="შეხვედრის სტატუსი"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meeting_details_card_title_text" />
+    <TextView
+        android:id="@+id/meeting_details_view_end_time"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:text="End Date: January 1, 2023, 12:00 PM"
+        app:layout_constraintTop_toBottomOf="@id/meeting_details_view_start_time" />
 
-        <TextView
-            android:id="@id/meeting_details_card_status_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="50dp"
-            android:text="სტატუსი"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@+id/meeting_details_card_status" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!-- Add TextViews and other UI elements to display meeting details -->
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

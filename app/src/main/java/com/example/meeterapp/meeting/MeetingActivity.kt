@@ -87,8 +87,8 @@ class MeetingActivity : FragmentActivity() {
                                 val hourChild = containerLayout.getChildAt(startHour)
                                 var meetingTextView =
                                     hourChild.findViewById<TextView>(R.id.meeting_text)
-                                setMeetingDetailsListener(meetingTextView)
                                 setMeetingData(meeting, meetingTextView)
+                                setMeetingDetailsListener(meetingTextView)
                             }
                         }
                         println()
@@ -111,8 +111,12 @@ class MeetingActivity : FragmentActivity() {
 
             // Pass meeting details to the fragment using arguments
             val args = Bundle()
-            args.putString("meetingTitle", "test")
-            args.putString("meetingDescription", "test")
+            var meeting: MeetingDTO = meetingTextView.tag as MeetingDTO
+            args.putString("name", meeting.name)
+            args.putString("status", meeting.status.toString())
+            args.putString("startTime", meeting.start.toString())
+            args.putString("endTime", meeting.end.toString())
+
             meetingDetailsFragment.arguments = args
 
             // Use this as the context to access the FragmentManager
@@ -122,6 +126,7 @@ class MeetingActivity : FragmentActivity() {
     }
 
     private fun setMeetingData(meeting: MeetingDTO, meetingTextView: TextView) {
+        meetingTextView.tag =  meeting
         var color: Int = -1
         if (meeting.status.name.equals("OPEN")) {
             color = R.color.meeting_not_reserved
